@@ -1,0 +1,13 @@
+{% extends "home.html" %}
+
+{% block title %}Users{% endblock title %}
+
+{% block more_content %}
+<div class="container mt-5">
+    <ul>
+    {% for object in object_list %}
+    <li style="list-style: none;"><p class="h5"><a href="{{ object.get_absolute_url }}" style="color: black;">{{ object.username }}</a></p></li>
+    {% endfor %}
+</ul>
+</div>
+{% endblock more_content %}

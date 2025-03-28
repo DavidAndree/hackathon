@@ -14,7 +14,7 @@ class CustomUser(AbstractUser):
         return self.email
 
     def get_absolute_url(self):
-        return reverse("login")  # FIXME: make this actual detail view
+        return reverse("user_detail", kwargs={"pk": self.pk})
 
 
 class Skill(models.Model):

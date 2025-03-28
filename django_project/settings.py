@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "mentorships.apps.MentorshipsConfig",
     "messaging.apps.MessagingConfig",
-    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
