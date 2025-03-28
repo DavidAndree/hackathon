@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "home.html" %}
 
 {% block content %}
 <h2>Add a Message</h2>
@@ -8,5 +8,5 @@
     <button type="submit">Post Message</button>
 </form>
 
-<a href="{% url 'conversation' %}">Back to Messages</a>
+<a href="{% url 'messaging:conversation' %}">Back to Messages</a>
 {% endblock content %}
