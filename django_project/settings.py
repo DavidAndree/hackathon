@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     
     #local apps
     'accounts.apps.AccountsConfig', 
+    'mentorships.apps.MentorshipsConfig',
+    'messaging.apps.MessagingConfig',
 ]
 
 MIDDLEWARE = [
