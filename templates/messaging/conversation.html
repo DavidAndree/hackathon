@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "home.html" %}
 
 {% block content %}
 <h2>Message Board</h2>
-<a href="{% url 'add_message' %}">Add a Message</a>
+<a href="{% url 'messaging:add_message' %}">Add a Message</a>
 
 <ul>
     {% for message in messages %}
