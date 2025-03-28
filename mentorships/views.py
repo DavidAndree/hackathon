@@ -1,21 +1,18 @@
-from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.views.generic import TemplateView
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
-from accounts.models import Mentee, Mentor
+from accounts.models import CustomUser  # Use CustomUser model
 
 
 class ConfigureRoleView(LoginRequiredMixin, View):
     def get(self, request):
         user = request.user
 
-        # Ensure user is a mentee by default
-        mentee, created = Mentee.objects.get_or_create(user=user)
-
-        if Mentor.objects.filter(user=user).exists():
-            return redirect(reverse("mentor_dashboard"))  # Redirect to mentor dashboard
+        # Redirect mentor users to the mentor dashboard
+        if user.is_mentor:
+            return redirect(reverse("mentor_dashboard"))
 
         return render(request, "mentorship/configure_role.html")
 
@@ -27,14 +24,21 @@ class ConfigureRoleView(LoginRequiredMixin, View):
 
 class MenteeDashboardView(LoginRequiredMixin, View):
     def get(self, request):
-        mentors = Mentor.objects.all()  # Fetch all mentors
+        mentors = CustomUser.objects.filter(is_mentor=True)  # Fetch all mentors
         return render(request, "mentorship/menteedashboard.html", {"mentors": mentors})
 
 
 class MentorDashboardView(LoginRequiredMixin, View):
     def get(self, request):
-        if not Mentor.objects.filter(user=request.user).exists():
+        user = request.user
+
+        if not user.is_mentor:
             return redirect(reverse("mentee_dashboard"))  # Redirect non-mentors
 
-        mentees = Mentee.objects.all()  # Fetch all mentees
+        mentees = CustomUser.objects.filter(is_mentee=True)  # Fetch all mentees
         return render(request, "mentorship/mentor_dashboard.html", {"mentees": mentees})
+    
+
+class MentorConfigView(TemplateView):
+    template_name = "mentorship/mentor_config.html"
+
