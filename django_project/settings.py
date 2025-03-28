@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-<<<<<<< HEAD
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,23 +46,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig', 
     'mentorships.apps.MentorshipsConfig',
     'messaging.apps.MessagingConfig',
-=======
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    # Third party apps
-    "crispy_forms",
-    "crispy_bootstrap5",
-    # local apps
-    "accounts.apps.AccountsConfig",
-    "mentorships.apps.MentorshipsConfig",
-    "messaging.apps.MessagingConfig",
-    "users.apps.UsersConfig",
->>>>>>> refs/remotes/origin/main
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
