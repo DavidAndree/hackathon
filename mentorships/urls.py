@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import configure_role, mentee_dashboard, mentor_dashboard
+from .views import ConfigureRoleView, MenteeDashboardView, MentorDashboardView
 
 urlpatterns = [
-    path('configure-role/', configure_role, name='configure_role'),
-    path('mentee-dashboard/', mentee_dashboard, name='mentee_dashboard'),
-    path('mentor-dashboard/', mentor_dashboard, name='mentor_dashboard'),
+    path('configure-role/', ConfigureRoleView.as_view(), name='configure_role'),
+    path('mentee-dashboard/', MenteeDashboardView.as_view(), name='mentee_dashboard'),
+    path('mentor-dashboard/', MentorDashboardView.as_view(), name='mentor_dashboard'),
 ]
