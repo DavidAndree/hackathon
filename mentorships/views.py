@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.views.generic import TemplateView
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
@@ -38,3 +39,7 @@ class MentorDashboardView(LoginRequiredMixin, View):
 
         mentees = Mentee.objects.all()  # Fetch all mentees
         return render(request, "mentorship/mentor_dashboard.html", {"mentees": mentees})
+    
+class MentorConfigView(TemplateView):
+
+    template_name = "mentorship/mentor_config.html"

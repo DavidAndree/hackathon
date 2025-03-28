@@ -10,7 +10,9 @@
                 <a class="navbar-brand fw-bold text-warning fs-3" href="#">JEDA</a>
                 <div class="ms-auto d-flex align-items-center">
                     <span class="me-3 text-light fw-semibold">Welcome, {{ user.username }}! 🎉</span>
-                    <a href="#" class="btn btn-primary">Profile</a>    
+                    <a href="{% url 'mentor_config' %}" class="btn btn-primary">
+                        Profile
+                    </a>                        
 
                     <form id='logout-form' method="POST" action="{% url 'logout' %}">
                         {% csrf_token %}
@@ -26,7 +28,7 @@
                     <!-- Logo Section -->
                     <div class="logo-container flex-grow-1 text-center text-md-start">
                         <h1 class="fw-bold display-3 text-warning">JEDA</h1>
-                        <img src="" alt="Logo">
+                        <img src="logo.png" alt="Logo">
                         <p class="fs-5 text-secondary">Stay connected with style.</p>
                     </div>
                     
