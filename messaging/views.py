@@ -1,3 +1,21 @@
-from django.shortcuts import render
+from django.views.generic import ListView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Message
+from django.urls import reverse_lazy
+from .forms import MessageForm
 
-# Create your views here.
+class ConversationView(LoginRequiredMixin, ListView):
+    model = Message
+    template_name = "messaging/conversation.html"
+    context_object_name = "messages"
+    ordering = ['-timestamp']
+
+class AddMessageView(LoginRequiredMixin, CreateView):
+    model = Message
+    form_class = MessageForm
+    template_name = "messaging/add_message.html"
+    success_url = reverse_lazy("conversation")
+
+    def form_valid(self, form):
+        form.instance.sender = self.request.user  # Automatically set sender
+        return super().form_valid(form)
