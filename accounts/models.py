@@ -38,4 +38,4 @@ class Mentor(models.Model):
     skills_teach = models.ManyToManyField(Skill)
 
     def get_absolute_url(self):
-        return reverse("mentro_detail", kwargs={"pk": self.pk})
+        return reverse("mentor_detail", kwargs={"pk": self.pk})
