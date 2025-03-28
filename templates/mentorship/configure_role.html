@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Become a Mentor</h2>
+  <p>You are currently a mentee by default. Would you like to subscribe and become a mentor?</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Subscribe as a Mentor</button>
+  </form>
+{% endblock %}

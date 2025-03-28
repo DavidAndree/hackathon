@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Available Mentors</h2>
+  <ul>
+    {% for mentor in mentors %}
+      <li>{{ mentor.user.username }} - {{ mentor.skills.all|join:", " }}</li>
+    {% empty %}
+      <li>No mentors available yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Available Mentees</h2>
+  <ul>
+    {% for mentee in mentees %}
+      <li>{{ mentee.user.username }} - Learning: {{ mentee.learning_goals }}</li>
+    {% empty %}
+      <li>No mentees available yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
