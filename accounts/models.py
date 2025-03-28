@@ -19,3 +19,23 @@ class CustomUser(AbstractUser):
 
 class Skill(models.Model):
     name = models.CharField(max_length=100)
+
+
+class Mentee(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, related_name="mentee"
+    )
+
+
+class Mentor(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    bio = models.TextField()
+    experience_years = models.IntegerField()
+    # subscription = models.OneToOneField(
+    #     "mentorship.subscription", on_delete=models.CASCADE
+    # )
+    skills_teach = models.ManyToManyField(Skill)
+
+    def get_absolute_url(self):
+        return reverse("mentro_detail", kwargs={"pk": self.pk})
