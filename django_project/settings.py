@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     
     
-    #local apps
+    #local apps 
     'accounts.apps.AccountsConfig', 
     'mentorships.apps.MentorshipsConfig',
     'messaging.apps.MessagingConfig',
