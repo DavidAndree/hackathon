@@ -1,0 +1,52 @@
+# accounts/models.py
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.urls import reverse
+
+class User(AbstractUser):
+    email = models.EmailField(unique=True, max_length=100)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.email
+    
+    def get_absolute_url(self):
+        return reverse('user_detail', kwargs={'pk': self.pk})
+
+class Skill(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def get_absolute_url(self):
+        return reverse('skill_detail', kwargs={'pk': self.pk})
+
+class Mentee(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    learning_goals = models.CharField(max_length=100)
+    skills_learn = models.ManyToManyField(Skill)
+    
+    def get_absolute_url(self):
+        return reverse('mentee_detail', kwargs={'pk': self.pk})
+
+class Mentor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField()
+    experience_years = models.IntegerField()
+    subscription = models.OneToOneField('mentorship.Subscription', on_delete=models.CASCADE)
+    skills_teach = models.ManyToManyField(Skill)
+    
+    def get_absolute_url(self):
+        return reverse('mentor_detail', kwargs={'pk': self.pk})
+
+# mentorship/models.py
+class Subscription(models.Model):
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    status = models.BooleanField()
+
+# messaging/models.py
+class Message(models.Model):
+    sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
